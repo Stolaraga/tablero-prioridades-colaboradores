@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prototipo académico para escuchar y priorizar problemas del equipo de trabajo.">
+  <title>Voz del equipo | Tablero de prioridades</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-content">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">●</span>
+        <span>Voz del equipo</span>
+      </div>
+      <span class="header-tag">Prototipo académico · Design Thinking</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="main-title">
+      <span class="eyebrow">PARTICIPACIÓN Y MEJORA CONTINUA</span>
+      <h1 id="main-title">Los problemas del equipo, en orden de prioridad</h1>
+      <p>Registra hasta dos necesidades o dificultades del trabajo. Vota por las situaciones que consideras más importantes. La lista se ordena automáticamente por votos.</p>
+      <div class="notice"><strong>Demostración sin almacenamiento:</strong> la información se comparte temporalmente mientras está activo el servidor y desaparece si se reinicia. No publiques datos personales ni información confidencial.</div>
+    </section>
+
+    <section class="metrics" aria-label="Indicadores del tablero">
+      <div class="metric"><span id="problem-total" class="metric-value">0</span><span class="metric-label">Problemas registrados</span></div>
+      <div class="metric"><span id="vote-total" class="metric-value">0</span><span class="metric-label">Votos emitidos</span></div>
+      <div class="metric"><span id="mine-total" class="metric-value">0 / 2</span><span class="metric-label">Mis publicaciones</span></div>
+    </section>
+
+    <div class="layout">
+      <section class="panel publish-panel" aria-labelledby="publish-title">
+        <div class="panel-heading"><h2 id="publish-title">Registrar un problema</h2><span class="chip">Máximo 2</span></div>
+        <p class="muted">Describe una dificultad concreta. Evita nombres de personas.</p>
+        <form id="problem-form">
+          <label for="title">Título del problema</label>
+          <input id="title" name="title" type="text" minlength="5" maxlength="110" placeholder="Ej.: Cambios de prioridad sin aviso" required>
+          <label for="category">Categoría</label>
+          <select id="category" name="category" required>
+            <option value="Comunicación">Comunicación</option>
+            <option value="Capacitación">Capacitación</option>
+            <option value="Clima laboral">Clima laboral</option>
+            <option value="Evaluación del desempeño">Evaluación del desempeño</option>
+            <option value="Otros">Otros</option>
+          </select>
+          <label for="description">Descripción breve <span class="optional">(opcional)</span></label>
+          <textarea id="description" name="description" rows="4" maxlength="500" placeholder="¿Qué sucede y por qué afecta el trabajo?"></textarea>
+          <button type="submit" class="btn btn-primary" id="submit-btn">Publicar problema</button>
+          <p id="limit-notice" class="helper" hidden>Has alcanzado el límite de dos problemas en esta demostración.</p>
+        </form>
+      </section>
+
+      <section class="panel board-panel" aria-labelledby="ranking-title">
+        <div class="panel-heading ranking-head"><div><h2 id="ranking-title">Prioridades del equipo</h2><p class="muted">Primero aparecen los problemas con más votos.</p></div><span id="connection" class="status">Cargando…</span></div>
+        <div id="problem-list" class="problem-list" aria-live="polite" aria-relevant="additions text"></div>
+        <p class="helper footer-note">Puedes votar una sola vez por problema y retirar tu voto. El tablero se actualiza cada 3 segundos.</p>
+      </section>
+    </div>
+    <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+  </main>
+  <footer class="wrap footer">Proyecto académico · Caso hipotético de un equipo de soporte tecnológico · Sin datos persistentes</footer>
+</body>
+</html>
